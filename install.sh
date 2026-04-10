@@ -10,7 +10,7 @@ SETTINGS="$CLAUDE_DIR/settings.json"
 
 echo "Deploying from: $REPO_DIR"
 
-# Symlink scripts
+# Symlink scripts into ~/.claude/
 for file in claude_usage_watch.sh claude_status_line.py; do
     target="$CLAUDE_DIR/$file"
     ln -sf "$REPO_DIR/$file" "$target"
@@ -19,6 +19,12 @@ done
 
 chmod +x "$REPO_DIR/claude_usage_watch.sh"
 chmod +x "$REPO_DIR/claude_status_line.py"
+
+# Symlink tmux-workspace.sh into ~/
+TMUX_TARGET="$HOME/tmux-workspace.sh"
+ln -sf "$REPO_DIR/tmux-workspace.sh" "$TMUX_TARGET"
+chmod +x "$REPO_DIR/tmux-workspace.sh"
+echo "  linked: $TMUX_TARGET"
 
 # Wire statusLine into ~/.claude/settings.json if not already set
 if [[ ! -f "$SETTINGS" ]]; then
@@ -35,7 +41,9 @@ else
 fi
 
 echo ""
-echo "Done. To start the usage monitor:"
-echo "  bash ~/.claude/claude_usage_watch.sh"
+echo "Done."
+echo ""
+echo "To launch the tmux workspace:"
+echo "  bash ~/tmux-workspace.sh"
 echo ""
 echo "Restart Claude Code to activate the status bar."

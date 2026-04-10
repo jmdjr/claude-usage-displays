@@ -4,6 +4,26 @@ Local Claude session display tools for monitoring token usage, context window, a
 
 ## Tools
 
+### `tmux-workspace.sh`
+Launches a `workspace` tmux session with a 2-column layout:
+
+```
++-------------------+--------------------+
+|                   |  claude_usage_watch|
+|   Main Claude     +--------------------+
+|   (left, 50%)     |  Open terminal     |
+|                   +--------------------+
+|                   |  Small Claude      |
++-------------------+--------------------+
+```
+
+Run it from anywhere:
+```bash
+bash ~/tmux-workspace.sh
+```
+
+Install symlinks it into `~/` so it's always on the path.
+
 ### `claude_usage_watch.sh`
 A live tmux dashboard that polls the current Claude Code session JSONL and displays:
 - Session info (ID, start time, last message)
